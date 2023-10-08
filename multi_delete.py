@@ -60,12 +60,8 @@ def parse_arguments():
         argparse.Namespace: The parsed command-line arguments.
     """
     parser = argparse.ArgumentParser(description="Batch delete files with options.")
-    parser.add_argument(
-        "directory", "-d", "--directory", help="The directory to delete files from."
-    )
-    parser.add_argument(
-        "extension", "-e", "--extension", help="The file extension to target."
-    )
+    parser.add_argument("-d", "--directory", help="The directory to delete files from.")
+    parser.add_argument("-e", "--extension", help="The file extension to target.")
     parser.add_argument(
         "-r", "--recursive", action="store_true", help="Enable recursive deletion."
     )
