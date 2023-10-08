@@ -1,36 +1,91 @@
 import os
+import argparse
 import send2trash
-import sys
 
-def batch_delete_files(directory, file_extension, recursive):
+
+def batch_delete_files(directory, file_extension, recursive, silent):
+    """
+    Batch delete files in a directory with options.
+
+    Args:
+        directory (str): The directory to delete files from.
+        file_extension (str): The file extension to target.
+        recursive (bool): Enable recursive deletion if True.
+        silent (bool): Enable silent mode (no progress messages) if True.
+    """
+
+    def delete_file(file_path):
+        """
+        Delete a file and send it to the trash.
+
+        Args:
+            file_path (str): The path to the file to be deleted.
+        """
+        try:
+            send2trash.send2trash(file_path)
+            if not silent:
+                print(f"Sent to trash: {file_path}")
+        except OSError as e:
+            if not silent:
+                print(f"Error sending {file_path} to trash: {e}")
+
+    def process_files_in_directory(path):
+        """
+        Recursively process files in a directory and delete those matching the file extension.
+
+        Args:
+            path (str): The path to the directory to process.
+        """
+        for file in os.listdir(path):
+            file_path = os.path.join(path, file)
+            if file.endswith(file_extension):
+                delete_file(file_path)
+            elif recursive and os.path.isdir(file_path):
+                process_files_in_directory(file_path)
+
     if recursive:
-        for root, _, files in os.walk(directory):
-            for file in files:
-                if file.endswith(file_extension):
-                    file_path = os.path.join(root, file)
-                    try:
-                        send2trash.send2trash(file_path)
-                        print(f"Sent to trash: {file_path}")
-                    except Exception as e:
-                        print(f"Error sending {file_path} to trash: {e}")
+        process_files_in_directory(directory)
     else:
         for file in os.listdir(directory):
+            file_path = os.path.join(directory, file)
             if file.endswith(file_extension):
-                file_path = os.path.join(directory, file)
-                try:
-                    send2trash.send2trash(file_path)
-                    print(f"Sent to trash: {file_path}")
-                except Exception as e:
-                    print(f"Error sending {file_path} to trash: {e}")
+                delete_file(file_path)
 
-if len(sys.argv) != 4:
-    print("Usage: python script_name.py directory_path file_extension recursive")
-else:
-    directory_path = sys.argv[1]
-    file_extension = sys.argv[2]
-    recursive_flag = sys.argv[3].lower() == "true"
+
+def parse_arguments():
+    """
+    Parse command-line arguments.
+
+    Returns:
+        argparse.Namespace: The parsed command-line arguments.
+    """
+    parser = argparse.ArgumentParser(description="Batch delete files with options.")
+    parser.add_argument(
+        "directory", "-d", "--directory", help="The directory to delete files from."
+    )
+    parser.add_argument(
+        "extension", "-e", "--extension", help="The file extension to target."
+    )
+    parser.add_argument(
+        "-r", "--recursive", action="store_true", help="Enable recursive deletion."
+    )
+    parser.add_argument(
+        "-s",
+        "--silent",
+        action="store_true",
+        help="Enable silent mode (no progress messages).",
+    )
+    return parser.parse_args()
+
+
+if __name__ == "__main__":
+    args = parse_arguments()
+    directory_path = args.directory
+    file_extension = args.extension
+    recursive = args.recursive
+    silent = args.silent
 
     if os.path.exists(directory_path):
-        batch_delete_files(directory_path, file_extension, recursive_flag)
+        batch_delete_files(directory_path, file_extension, recursive, silent)
     else:
         print(f"Directory '{directory_path}' does not exist.")
