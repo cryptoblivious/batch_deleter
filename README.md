@@ -1,6 +1,6 @@
-# Batch Deleter
+# Bulk Deleter
 
-Batch Deleter is a versatile Python script that empowers you to delete files with specific extensions from a directory. It offers options for recursive deletion and provides detailed progress updates. This script is designed to work seamlessly on various platforms, including Linux, Windows, and macOS.
+Bulk Deleter is a versatile Python script that empowers you to delete files with specific extensions from a directory. It offers options for recursive deletion and provides detailed progress updates. This script is designed to work seamlessly on various platforms, including Linux, Windows, and macOS.
 
 ## Features
 
@@ -30,12 +30,12 @@ Batch Deleter is a versatile Python script that empowers you to delete files wit
 
 2. Open a terminal or command prompt.
 
-3. Navigate to the directory containing the `batch_deleter.py` script.
+3. Navigate to the directory containing the `bulk_deleter.py` script.
 
 4. Execute the script with the following command:
 
    ```bash
-   python batch_deleter.py directory_path file_extension [-r] [-v]
+   python bulk_deleter.py directory_path file_extension [-r] [-v]
    ```
 
    Replace the following arguments:
@@ -50,13 +50,13 @@ Batch Deleter is a versatile Python script that empowers you to delete files wit
 - Delete all `.txt` files from the current directory:
 
   ```bash
-  python batch_deleter.py . txt
+  python bulk_deleter.py . txt
   ```
 
 - Delete all `.jpg` files from a specific directory and its subdirectories:
 
   ```bash
-  python batch_deleter.py /path/to/directory jpg -r -v
+  python bulk_deleter.py /path/to/directory jpg -r -v
   ```
 
 ## Important Notes
@@ -71,10 +71,10 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Platform Detection
 
-Batch Deleter automatically identifies the platform you are using (Linux, Windows, macOS, or Unknown) and tailors its output accordingly.
+Bulk Deleter automatically identifies the platform you are using (Linux, Windows, macOS, or Unknown) and tailors its output accordingly.
 
 ## Contributing
 
 If you encounter any issues or have suggestions for enhancements, we encourage you to open an issue or submit a pull request. Your contributions are welcome!
 
-Happy batch deleting!
+Happy bulk deleting!
