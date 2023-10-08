@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Script with CLI Inputs",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/multi_delete.py", // Replace with your script's path
+      "args": [
+        "C:\\Users\\andrz\\Downloads\\takeout-20231006T012400Z-001\\Takeout\\Google Photos", // Replace with the directory argument
+        ".json", // Replace with the file extension argument
+        "-r", // Enable recursive deletion if needed
+        "-v" // Enable verbose mode if needed
+      ],
+      "console": "integratedTerminal"
+    }
+  ]
+}
