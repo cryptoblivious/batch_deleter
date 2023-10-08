@@ -67,7 +67,7 @@ Bulk Deleter is a versatile Python script that empowers you to delete files with
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU V3 General Public License. See the [LICENSE](LICENSE) file for details.
 
 ## Platform Detection
 
