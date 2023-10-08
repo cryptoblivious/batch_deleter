@@ -3,9 +3,9 @@ import argparse
 import send2trash
 
 
-def batch_delete_files(directory, file_extension, recursive, silent):
+def bulk_delete_files(directory, file_extension, recursive, silent):
     """
-    Batch delete files in a directory with options.
+    Bulk delete files in a directory with options.
 
     Args:
         directory (str): The directory to delete files from.
@@ -60,8 +60,13 @@ def parse_arguments():
         argparse.Namespace: The parsed command-line arguments.
     """
     parser = argparse.ArgumentParser(description="Batch delete files with options.")
-    parser.add_argument("-d", "--directory", help="The directory to delete files from.")
-    parser.add_argument("-e", "--extension", help="The file extension to target.")
+    parser.add_argument(
+        "directory", metavar="directory", help="The directory to delete files from."
+    )
+
+    parser.add_argument(
+        "extension", metavar="extension", help="The file extension to target."
+    )
     parser.add_argument(
         "-r", "--recursive", action="store_true", help="Enable recursive deletion."
     )
@@ -82,6 +87,6 @@ if __name__ == "__main__":
     silent = args.silent
 
     if os.path.exists(directory_path):
-        batch_delete_files(directory_path, file_extension, recursive, silent)
+        bulk_delete_files(directory_path, file_extension, recursive, silent)
     else:
         print(f"Directory '{directory_path}' does not exist.")
